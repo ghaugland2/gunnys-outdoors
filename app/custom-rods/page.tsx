@@ -139,7 +139,7 @@ export default function CustomRodsPage() {
                 </label>
                 <label className="block text-sm text-stone-300">
                   Length
-                  <input className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-sky-500" placeholder="Example: 7'0\"" />
+                  <input className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-sky-500" placeholder="Example: 7 feet 0 inches" />
                 </label>
                 <label className="block text-sm text-stone-300">
                   Action
