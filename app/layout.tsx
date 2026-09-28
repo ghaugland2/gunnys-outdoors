@@ -1,42 +1,25 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { SiteHeader } from '../components/site-header';
-import { SiteFooter } from '../components/site-footer';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+import type { Metadata } from 'next'
+import './globals.css'
+import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gunnys-outdoors.com'),
-  title: {
-    default: "Gunny's Outdoors | Custom Fishing Rods & Outdoor Gear",
-    template: "%s | Gunny's Outdoors",
-  },
-  description:
-    'Custom fishing rods, outdoor gear, and Devils Lake fishing expertise from Gunny\'s Outdoors in North Dakota.',
-  keywords: ['custom fishing rods', 'Devils Lake fishing', 'outdoor gear', 'North Dakota fishing', 'custom rods'],
-  openGraph: {
-    title: "Gunny's Outdoors | Custom Fishing Rods & Outdoor Gear",
-    description:
-      'Built for anglers by anglers. Custom fishing rods, gear, and local fishing expertise from Devils Lake, North Dakota.',
-    url: 'https://gunnys-outdoors.com',
-    siteName: "Gunny's Outdoors",
-    type: 'website',
-    locale: 'en_US',
-  },
-  alternates: {
-    canonical: 'https://gunnys-outdoors.com',
-  },
-};
+  title: "Gunny's Outdoors - Custom Fishing Rods & Outdoor Gear",
+  description: 'Premium custom-built fishing rods and outdoor equipment crafted for serious anglers. Built for North Dakota waters.',
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-[#0c100d] text-stone-100 antialiased">
+    <html lang="en">
+      <body>
         <SiteHeader />
-        <main>{children}</main>
+        {children}
         <SiteFooter />
       </body>
     </html>
-  );
+  )
 }
