@@ -1,109 +1,101 @@
-import { Mail, MapPin, Phone, Send, Clock3 } from 'lucide-react';
+'use client';
 
-export default function ContactPage() {
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/custom-rods', label: 'Custom Rods' },
+  { href: '/fishing-reports', label: 'Fishing Reports' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+export function SiteHeader() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <>
-      <section className="section-space">
-        <div className="page-shell">
-          <div className="mb-10 max-w-3xl">
-            <div className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-sky-500">
-              Contact
-            </div>
-            <h1 className="text-4xl font-black tracking-tight text-white md:text-6xl">
-              Let’s talk about your next setup.
-            </h1>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0c100d]/85 backdrop-blur-xl">
+      <div className="page-shell flex items-center justify-between py-4">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-10 h-10">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+              <circle cx="20" cy="20" r="18" fill="none" stroke="#d4af37" strokeWidth="1" opacity="0.6" />
+              <defs>
+                <linearGradient id="miniGrad">
+                  <stop offset="0%" stopColor="#2a1f14" />
+                  <stop offset="100%" stopColor="#0d0a08" />
+                </linearGradient>
+              </defs>
+              <circle cx="20" cy="20" r="17" fill="url(#miniGrad)" />
+              
+              {/* Mini crossed rods */}
+              <line x1="10" y1="28" x2="22" y2="10" stroke="#8b7355" strokeWidth="1.5" strokeLinecap="round" />
+              <line x1="30" y1="28" x2="18" y2="10" stroke="#8b7355" strokeWidth="1.5" strokeLinecap="round" />
+              
+              {/* Mini fish */}
+              <ellipse cx="20" cy="19" rx="5" ry="3" fill="#c9a961" />
+              <circle cx="17" cy="18.5" r="0.8" fill="#2a1f14" />
+            </svg>
           </div>
+          <div>
+            <div className="text-sm font-black leading-none text-white group-hover:text-amber-300 transition">Gunny's</div>
+            <div className="text-[9px] font-bold uppercase tracking-wider text-stone-400 group-hover:text-amber-200 transition">Outdoors</div>
+          </div>
+        </Link>
 
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="surface-card p-8">
-              <div className="space-y-6">
-                <div className="flex items-start gap-3">
-                  <MapPin className="mt-1 text-sky-400" size={18} />
-                  <div>
-                    <div className="text-sm font-bold uppercase tracking-[0.22em] text-stone-500">Location</div>
-                    <div className="mt-2 text-stone-200">Devils Lake, North Dakota</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Mail className="mt-1 text-sky-400" size={18} />
-                  <div>
-                    <div className="text-sm font-bold uppercase tracking-[0.22em] text-stone-500">Email</div>
-                    <div className="mt-2 text-stone-200">hello@gunnysoutdoors.com</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Phone className="mt-1 text-sky-400" size={18} />
-                  <div>
-                    <div className="text-sm font-bold uppercase tracking-[0.22em] text-stone-500">Phone</div>
-                    <div className="mt-2 text-stone-200">(701) 555-0143</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Clock3 className="mt-1 text-sky-400" size={18} />
-                  <div>
-                    <div className="text-sm font-bold uppercase tracking-[0.22em] text-stone-500">Business Hours</div>
-                    <div className="mt-2 text-stone-200">Mon–Fri: 8:00am–6:00pm</div>
-                  </div>
-                </div>
-              </div>
+        <nav className="hidden items-center gap-8 lg:flex">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-semibold transition ${
+                  isActive ? 'text-amber-300' : 'text-stone-300 hover:text-amber-300'
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-              <div className="mt-8 rounded-2xl border border-white/10 bg-black/10 p-4">
-                <div className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-sky-400">
-                  Social
-                </div>
-                <div className="flex gap-3 text-sm text-stone-200">
-                  <a href="#" className="hover:text-sky-300">Instagram</a>
-                  <a href="#" className="hover:text-sky-300">Facebook</a>
-                  <a href="#" className="hover:text-sky-300">YouTube</a>
-                </div>
-              </div>
-            </div>
+        <div className="flex items-center gap-3">
+          <Link href="/custom-rods" className="hidden rounded-full bg-sky-500 px-4 py-2 text-sm font-bold text-black transition hover:bg-sky-400 sm:inline-flex">
+            Start a Build
+          </Link>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            onClick={() => setIsOpen((v) => !v)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/[0.02] text-white lg:hidden hover:bg-white/5 transition"
+          >
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </div>
 
-            <div className="surface-card p-8">
-              <div className="mb-6 text-xs font-bold uppercase tracking-[0.28em] text-sky-500">
-                Send a message
-              </div>
-              <form className="grid gap-5">
-                <label className="block text-sm text-stone-300">
-                  Name
-                  <input required className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-sky-500" />
-                </label>
-                <label className="block text-sm text-stone-300">
-                  Email
-                  <input type="email" required className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-sky-500" />
-                </label>
-                <label className="block text-sm text-stone-300">
-                  Subject
-                  <input className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-sky-500" />
-                </label>
-                <label className="block text-sm text-stone-300">
-                  Message
-                  <textarea rows={5} className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-sky-500" />
-                </label>
-                <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-500 px-6 py-3 text-sm font-bold text-black transition hover:bg-sky-400">
-                  <Send size={16} /> Send Message
-                </button>
-              </form>
-            </div>
+      {isOpen && (
+        <div className="border-t border-white/10 bg-[#0c100d] lg:hidden">
+          <div className="page-shell py-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="block border-b border-white/5 py-3 text-sm font-semibold text-stone-200 last:border-b-0 hover:text-amber-300 transition"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
-      </section>
-
-      <section className="pb-24">
-        <div className="page-shell">
-          <div className="surface-card overflow-hidden">
-            <div className="flex min-h-[360px] items-center justify-center bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.18),transparent_30%),linear-gradient(135deg,#103026,#111111)] p-8">
-              <div className="text-center">
-                <div className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-sky-300">
-                  Map placeholder
-                </div>
-                <div className="text-3xl font-black text-white">Devils Lake, North Dakota</div>
-                <div className="mt-2 text-stone-300">Google Maps embed placeholder</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      )}
+    </header>
   );
 }
