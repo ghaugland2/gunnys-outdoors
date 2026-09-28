@@ -1,0 +1,49 @@
+# Gunny's Outdoors
+
+A modern outdoors and custom fishing rod storefront built with Next.js 15, React, and Tailwind CSS.
+
+## Features
+
+- Responsive homepage and multi-page storefront
+- Custom rod request flow
+- Fishing report section
+- Product catalog and shop layout
+- About and Contact pages
+- Dark mode outdoor brand styling
+- SEO metadata and accessible structure
+- Vercel-ready setup
+
+## Stack
+
+- Next.js 15
+- React
+- TypeScript
+- Tailwind CSS
+- Lucide icons
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+Then open http://localhost:3000.
+
+## Production Build
+
+```bash
+npm run build
+npm start
+```
+
+## Deployment to Vercel
+
+1. Push this repo to GitHub.
+2. Import the repo in Vercel.
+3. Use the default Next.js settings.
+4. Deploy.
+
+## Customization
+
+Update contact details, product listings, fishing reports, and branding colors in the page files and components.
